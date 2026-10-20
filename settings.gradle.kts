@@ -24,4 +24,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "My Application"
 include(":app")
- 
+include(":app:s04")
+include(":app:tasks04")

@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">taskS04</string>
+    <string name="adauga_masina">Adauga Masina</string>
+    <string name="marca">Marca</string>
+    <string name="pret">Pret</string>
+    <string name="electrica">Electrica</string>
+
+
+    <string-array name="categorii">
+        <item>Sedan</item>
+        <item>SUV</item>
+        <item>Hatchback</item>
+    </string-array>
+</resources>

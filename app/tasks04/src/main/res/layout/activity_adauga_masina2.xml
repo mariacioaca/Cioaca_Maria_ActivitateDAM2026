@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/adauga_masina" />
+
+    <EditText
+    android:id="@+id/etMarca"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="@string/marca" />
+
+    <EditText
+    android:id="@+id/etPret"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="@string/pret"
+    android:inputType="numberDecimal" />
+
+    <CheckBox
+    android:id="@+id/cbElectrica"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/electrica" />
+
+    <Spinner
+        android:id="@+id/spCategorie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btnSalveaza"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Salveaza" />
+</LinearLayout>
