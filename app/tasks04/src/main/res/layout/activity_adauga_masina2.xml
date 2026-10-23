@@ -35,6 +35,12 @@
         android:id="@+id/spCategorie"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <Switch
+        android:id="@+id/switchNoua"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/masina_noua"
+        android:checked="false" />
     <Button
         android:id="@+id/btnSalveaza"
         android:layout_width="match_parent"

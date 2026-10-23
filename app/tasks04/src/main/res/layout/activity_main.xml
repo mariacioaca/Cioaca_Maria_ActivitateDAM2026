@@ -11,7 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="culegereDate"
-        android:text="Adauga" />
+        android:text="@string/adauga" />
+
+    <Button
+        android:id="@+id/btnAdaugaAI"
+        android:onClick="culegereDateAI"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/adauga_masina_cu_ai" />
 
     <TextView
         android:id="@+id/tvRezultat"

@@ -4,6 +4,19 @@
     <string name="marca">Marca</string>
     <string name="pret">Pret</string>
     <string name="electrica">Electrica</string>
+    <string name="masina_noua">Masina noua</string>
+    <string name="auto_manager">AUTO MANAGER</string>
+    <string name="adauga_o_masina">Adauga o masina</string>
+    <string name="completeaza_datele_vehiculului">Completeaza datele vehiculului</string>
+    <string name="marca_masinii">Marca masinii</string>
+    <string name="pret_eur">Pret (EUR)</string>
+    <string name="categorie">Categorie</string>
+    <string name="masina_electrica">Masina electrica</string>
+    <string name="masina_noua2">Masina noua</string>
+    <string name="salveaza_masina">Salveaza masina</string>
+    <string name="masina_noua0">Masina noua</string>
+    <string name="adauga">Adauga</string>
+    <string name="adauga_masina_cu_ai">Adauga masina cu AI</string>
 
 
     <string-array name="categorii">
