@@ -20,6 +20,13 @@
         android:layout_height="wrap_content"
         android:text="@string/adauga_masina_cu_ai" />
 
+    <Button
+        android:id="@+id/btnAfisareMasini"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="afisareMasini"
+        android:text="@string/vezi_toate_masinile" />
+
     <TextView
         android:id="@+id/tvRezultat"
         android:layout_width="wrap_content"

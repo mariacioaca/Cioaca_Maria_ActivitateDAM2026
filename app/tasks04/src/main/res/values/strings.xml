@@ -17,6 +17,9 @@
     <string name="masina_noua0">Masina noua</string>
     <string name="adauga">Adauga</string>
     <string name="adauga_masina_cu_ai">Adauga masina cu AI</string>
+    <string name="lista_masinilor">Lista masinilor</string>
+    <string name="apasa_pentru_detalii_ine_apasat_pentru_stergere">Apasa pentru detalii. Ține apasat pentru stergere.</string>
+    <string name="vezi_toate_masinile">Vezi toate masinile</string>
 
 
     <string-array name="categorii">
