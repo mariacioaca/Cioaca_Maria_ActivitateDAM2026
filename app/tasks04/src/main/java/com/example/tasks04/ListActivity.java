@@ -8,7 +8,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.IntentCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -16,11 +19,23 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.ArrayList;
 
 public class ListActivity extends AppCompatActivity {
-
-    private ArrayList<Masina> masini;
-    private ArrayAdapter<Masina> adapter;
+    private ArrayList<Masina> masini=null;
+    private MasinaAdapter adapter=null;
     private ListView lvMasini;
     private TextView tvInstructiuni;
+    private final ActivityResultLauncher<Intent> editLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(), result -> {
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                    Intent data = result.getData();
+                    Masina m = IntentCompat.getParcelableExtra(data, "masina", Masina.class);
+                    int poz = data.getIntExtra("pozitie", -1);
+                    if (m != null && poz >= 0 && poz < masini.size()) {
+                        masini.set(poz, m);
+                        adapter.notifyDataSetChanged();
+                        trimiteRezultat();
+                    }
+                }
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,60 +45,40 @@ public class ListActivity extends AppCompatActivity {
         lvMasini = findViewById(R.id.lvMasini);
         tvInstructiuni = findViewById(R.id.tvInstructiuni);
 
-        Intent intent = getIntent();
+        ArrayList<Masina> primita =
+                IntentCompat.getParcelableArrayListExtra(getIntent(), "masini", Masina.class);
+        masini = primita != null ? primita : new ArrayList<>();
 
-        @SuppressWarnings("unchecked")
-        ArrayList<Masina> listaPrimita =
-                (ArrayList<Masina>) intent.getSerializableExtra("masini");
-
-        if (listaPrimita != null) {
-            masini = listaPrimita;
-        } else {
-            masini = new ArrayList<>();
-        }
-
-        adapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_list_item_1,
-                masini
-        );
-
+        adapter = new MasinaAdapter(masini, this, R.layout.masina);
         lvMasini.setAdapter(adapter);
 
         actualizeazaInstructiuni();
+        trimiteRezultat();
 
-        // Cerinta 3
+        // click = modificare
         lvMasini.setOnItemClickListener((parent, view, position, id) -> {
-            Masina masina = masini.get(position);
-
-            Toast.makeText(
-                    this,
-                    masina.toString(),
-                    Toast.LENGTH_LONG
-            ).show();
+            Intent i = new Intent(this, AdaugaMasinaActivity.class);
+            i.putExtra("masina", masini.get(position));
+            i.putExtra("pozitie", position);
+            editLauncher.launch(i);
         });
 
-        // Cerinta 4
-        lvMasini.setOnItemLongClickListener(
-                (parent, view, position, id) -> {
+        // long click = stergere
+        lvMasini.setOnItemLongClickListener((parent, view, position, id) -> {
+            masini.remove(position);
+            adapter.notifyDataSetChanged();
+            actualizeazaInstructiuni();
+            trimiteRezultat();
 
-                    Masina masinaStearsa = masini.remove(position);
-
-                    adapter.notifyDataSetChanged();
-
-                    actualizeazaInstructiuni();
-
-                    Toast.makeText(
-                            this,
-                            "Mașina a fost ștearsă!",
-                            Toast.LENGTH_SHORT
-                    ).show();
-
-                    return true;
-                }
-        );
+            Toast.makeText(this, "Mașina a fost ștearsă!", Toast.LENGTH_SHORT).show();
+            return true;
+        });
     }
-
+    private void trimiteRezultat() {
+        Intent r = new Intent();
+        r.putParcelableArrayListExtra("masini", masini);
+        setResult(RESULT_OK, r);
+    }
     private void actualizeazaInstructiuni() {
         tvInstructiuni.setText(
                 "Număr de mașini: " + masini.size()
@@ -91,13 +86,5 @@ public class ListActivity extends AppCompatActivity {
         );
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent rezultat = new Intent();
-        rezultat.putExtra("masini", masini);
 
-        setResult(RESULT_OK, rezultat);
-
-        super.onBackPressed();
-    }
 }

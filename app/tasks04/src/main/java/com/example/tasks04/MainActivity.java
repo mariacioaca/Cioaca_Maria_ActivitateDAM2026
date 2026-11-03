@@ -8,6 +8,7 @@ import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.IntentCompat;
 
 import java.util.ArrayList;
 
@@ -20,8 +21,7 @@ public class MainActivity extends AppCompatActivity {
                 if (result.getResultCode() == RESULT_OK
                         && result.getData() != null) {
                     Intent data = result.getData();
-                    Masina masina = (Masina)
-                            data.getSerializableExtra("masina");
+                    Masina masina = IntentCompat.getParcelableExtra(data, "masina", Masina.class);
                     if (masina != null) {
                         masini.add(masina);
                         tvRezultat.setText(masina.toString());
@@ -36,8 +36,7 @@ public class MainActivity extends AppCompatActivity {
                         if (result.getResultCode() == RESULT_OK
                                 && result.getData() != null) {
 
-                            @SuppressWarnings("unchecked")
-                            ArrayList<Masina> masiniActualizate = (ArrayList<Masina>) result.getData().getSerializableExtra("masini");
+                            ArrayList<Masina> masiniActualizate = IntentCompat.getParcelableArrayListExtra(result.getData(), "masini", Masina.class);
 
                             if (masiniActualizate != null) {
                                 masini = masiniActualizate;
@@ -64,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     public void afisareMasini(View view) {
         Intent intent = new Intent(MainActivity.this, ListActivity.class);
 
-        intent.putExtra("masini", masini);
+        intent.putParcelableArrayListExtra("masini", masini);
         listaLauncher.launch(intent);
     }
 }

@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.IntentCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -36,7 +37,16 @@ public class AdaugaMasinaActivity extends AppCompatActivity {
                 this, R.array.categorii, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spCategorie.setAdapter(adapter);
-
+        //
+        final int pozitie = getIntent().getIntExtra("pozitie", -1);
+        Masina existenta = IntentCompat.getParcelableExtra(getIntent(), "masina", Masina.class);
+        if (existenta != null) {
+            etMarca.setText(existenta.getMarca());
+            etPret.setText(String.valueOf(existenta.getPret()));
+            cbElectrica.setChecked(existenta.isElectrica());
+            switchNoua.setChecked(existenta.isEsteNoua());
+            spCategorie.setSelection(adapter.getPosition(existenta.getCategorie()));
+        }
         btnSalveaza.setOnClickListener(v -> {
             String pretText = etPret.getText().toString();
             if (pretText.isEmpty()) {
@@ -55,6 +65,7 @@ public class AdaugaMasinaActivity extends AppCompatActivity {
 
             Intent intent = new Intent();
             intent.putExtra("masina", masina);
+            intent.putExtra("pozitie", pozitie);
             setResult(RESULT_OK, intent);
             finish();
         });

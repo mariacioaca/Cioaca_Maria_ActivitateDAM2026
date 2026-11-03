@@ -26,5 +26,7 @@
         <item>Sedan</item>
         <item>SUV</item>
         <item>Hatchback</item>
+        <item>Coupe</item>
+        <item>Break</item>
     </string-array>
 </resources>
