@@ -82,7 +82,7 @@ public class ListActivity extends AppCompatActivity {
     private void actualizeazaInstructiuni() {
         tvInstructiuni.setText(
                 "Număr de mașini: " + masini.size()
-                        + "\nApasă pentru detalii. Ține apăsat pentru ștergere."
+                        + "\nApasă pentru modificare"
         );
     }
 

@@ -20,6 +20,8 @@
     <string name="lista_masinilor">Lista masinilor</string>
     <string name="apasa_pentru_detalii_ine_apasat_pentru_stergere">Apasa pentru detalii. Ține apasat pentru stergere.</string>
     <string name="vezi_toate_masinile">Vezi toate masinile</string>
+    <string name="galerie_masini">Galerie masini</string>
+    <string name="imagine_masina">Imagine masina</string>
 
 
     <string-array name="categorii">

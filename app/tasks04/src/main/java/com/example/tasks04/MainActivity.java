@@ -66,4 +66,9 @@ public class MainActivity extends AppCompatActivity {
         intent.putParcelableArrayListExtra("masini", masini);
         listaLauncher.launch(intent);
     }
+    public void deschideGalerie(View view) {
+        Intent intent = new Intent(this, GalerieActivity.class);
+        startActivity(intent);
+    }
+
 }
