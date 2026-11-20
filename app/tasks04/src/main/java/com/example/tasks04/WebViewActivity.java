@@ -1,6 +1,8 @@
 package com.example.tasks04;
 
 import android.os.Bundle;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,5 +22,8 @@ public class WebViewActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        WebView wv = findViewById(R.id.webView);
+        wv.setWebViewClient(new WebViewClient());
+        wv.loadUrl(getIntent().getStringExtra("link"));
     }
 }

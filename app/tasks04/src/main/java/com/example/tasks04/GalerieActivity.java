@@ -27,67 +27,56 @@ import java.util.concurrent.Executors;
 public class GalerieActivity extends AppCompatActivity {
 
     private List<ImagineMasina> lista = new ArrayList<>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_galerie);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.lvGalerie), (v, insets) -> {
+
+        ListView lv = findViewById(R.id.lvGalerie);
+        ViewCompat.setOnApplyWindowInsetsListener(lv, (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        ListView lv = findViewById(R.id.lvGalerie);
 
-        List<String> linkuriImagini=new ArrayList<>();
-        linkuriImagini.add("https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c6/2013_Porsche_911_Carrera_4S_%28991%29_%289626546987%29.jpg/1920px-2013_Porsche_911_Carrera_4S_%28991%29_%289626546987%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail&_=20131024163505");
-        linkuriImagini.add("https://encrypted-tbn0.gstatic.com/images?");
-        linkuriImagini.add("https://encrypted-tbn0.gstatic.com/images?");
-        linkuriImagini.add("https://encrypted-tbn0.gstatic.com/images?");
-        linkuriImagini.add("https://encrypted-tbn0.gstatic.com/images?");
+        ArrayList<ImagineMasina> lista = new ArrayList<>();
 
+        lista.add(new ImagineMasina(
+                "https://commons.wikimedia.org/wiki/Special:FilePath/2013_Porsche_911_Carrera_4S_(991)_(9626546987).jpg?width=400",
+                "Porsche 911",
+                "https://en.wikipedia.org/wiki/Porsche_911"));
 
-        Executor executor= Executors.newSingleThreadExecutor();
-        Handler handler = new Handler(Looper.myLooper());
-        List<Bitmap> imagini = new ArrayList<>();
-        executor.execute(new Runnable(){
-            @Override
-            public void run(){
-                for(String link: linkuriImagini){
-                    HttpURLConnection con=null;
-                    try{
-                        URL url=new URL(link);
-                        con = (HttpURLConnection) url.openConnection();
-                        InputStream is =con.getInputStream();
-                        imagini.add(BitmapFactory.decodeStream(is));
-                        is.close();
-                        con.disconnect();
-                    }
-                    catch (Exception e) {
-                        e.printStackTrace();
-                        imagini.add(null);
-                    }
-                }
-            }
+        // Tesla
+        lista.add(new ImagineMasina(
+                "https://commons.wikimedia.org/wiki/Special:FilePath/Tesla_Model_S_-_rot.jpg?width=400",
+                "Tesla Model S",
+                "https://en.wikipedia.org/wiki/Tesla_Model_S"));
 
-        });
-        handler.post(new Runnable(){
-            @Override
-            public void run(){
-                lista = new ArrayList<>();
-               // lista.add();
+// BMW
+        lista.add(new ImagineMasina(
+                "https://commons.wikimedia.org/wiki/Special:FilePath/BMW_M3_Competition.jpg?width=400",
+                "BMW M3",
+                "https://en.wikipedia.org/wiki/BMW_M3"));
 
-            }
-        });
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
-                Intent it = new Intent(GalerieActivity.this, WebViewActivity.class);
-                it.putExtra("link", lista.get(i).getUrlImagine());
-                startActivity(it);
-            }
+// Golf
+        lista.add(new ImagineMasina(
+                "https://commons.wikimedia.org/wiki/Special:FilePath/Volkswagen_Golf_GTi_1.jpg?width=400",
+                "Volkswagen Golf",
+                "https://en.wikipedia.org/wiki/Volkswagen_Golf"));
+
+// Mustang
+        lista.add(new ImagineMasina(
+                "https://commons.wikimedia.org/wiki/Special:FilePath/Ford_Mustang_VII.jpg?width=400",
+                "Ford Mustang",
+                "https://en.wikipedia.org/wiki/Ford_Mustang"));
+
+        lv.setAdapter(new ImagineMasinaAdapter(this, lista, R.layout.item_imagine));
+
+        lv.setOnItemClickListener((parent, view, i, id) -> {
+            Intent it = new Intent(GalerieActivity.this, WebViewActivity.class);
+            it.putExtra("link", lista.get(i).getUrlPagina());
+            startActivity(it);
         });
     }
 }
