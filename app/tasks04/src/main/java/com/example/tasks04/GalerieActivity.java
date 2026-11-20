@@ -47,25 +47,22 @@ public class GalerieActivity extends AppCompatActivity {
                 "Porsche 911",
                 "https://en.wikipedia.org/wiki/Porsche_911"));
 
-        // Tesla
+
         lista.add(new ImagineMasina(
                 "https://commons.wikimedia.org/wiki/Special:FilePath/Tesla_Model_S_-_rot.jpg?width=400",
                 "Tesla Model S",
                 "https://en.wikipedia.org/wiki/Tesla_Model_S"));
 
-// BMW
         lista.add(new ImagineMasina(
                 "https://commons.wikimedia.org/wiki/Special:FilePath/BMW_M3_Competition.jpg?width=400",
                 "BMW M3",
                 "https://en.wikipedia.org/wiki/BMW_M3"));
 
-// Golf
         lista.add(new ImagineMasina(
                 "https://commons.wikimedia.org/wiki/Special:FilePath/Volkswagen_Golf_GTi_1.jpg?width=400",
                 "Volkswagen Golf",
                 "https://en.wikipedia.org/wiki/Volkswagen_Golf"));
 
-// Mustang
         lista.add(new ImagineMasina(
                 "https://commons.wikimedia.org/wiki/Special:FilePath/Ford_Mustang_VII.jpg?width=400",
                 "Ford Mustang",
